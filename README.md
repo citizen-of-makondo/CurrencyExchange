@@ -4,3 +4,7 @@
 <img width="210" alt="image" src="https://user-images.githubusercontent.com/74677991/201435658-74571373-b2d5-4e21-876d-7a20b8f0e3e8.png"><img width="210" alt="image" src="https://user-images.githubusercontent.com/74677991/201435669-15dd8e6d-9ffc-42a9-84e0-c1e97752a868.png">
 
 Стэк: Kotlin, Retrofit, StateFlow, Room, MVVM
+
+P.S.
+В списке валют есть русский рубль, однако при его выборе выпадает ошибка. Я специально его оставил для показа обработки ошибок
+
