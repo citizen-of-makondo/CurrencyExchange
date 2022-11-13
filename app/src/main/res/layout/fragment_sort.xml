@@ -1,31 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.sort.SortFragment">
 
-    <RadioButton
-        android:id="@+id/sort"
-        android:layout_marginTop="24dp"
-        android:text="@string/sort"
-        android:textSize="16sp"
-        android:textColor="@color/primaryTextColor"
-        android:layout_marginStart="24dp"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginTop="@dimen/margin_24"
+        android:text="@string/sort_values"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16sp" />
 
     <RadioButton
-        android:id="@+id/sort_by_desc"
-        android:layout_marginTop="24dp"
-        android:text="@string/sort_by_desc"
-        android:textSize="16sp"
-        android:textColor="@color/primaryTextColor"
+        android:id="@+id/sort_values_by_asc"
         android:layout_width="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/sort"
-        app:layout_constraintTop_toBottomOf="@id/sort"
-        android:layout_height="wrap_content" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginTop="@dimen/margin_24"
+        android:text="@string/sort_by_asc"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16sp" />
+
+    <RadioButton
+        android:id="@+id/sort_values_by_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginTop="@dimen/margin_24"
+        android:text="@string/sort_by_desc"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginTop="@dimen/margin_24"
+        android:text="@string/sort_alphabetically"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16sp" />
+
+    <RadioButton
+        android:id="@+id/sort_alphabetically_by_asc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginTop="@dimen/margin_24"
+        android:text="@string/sort_by_asc"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16sp" />
+
+    <RadioButton
+        android:id="@+id/sort_alphabetically_by_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginTop="@dimen/margin_24"
+        android:text="@string/sort_by_desc"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="16sp" />
+</LinearLayout>

@@ -2,7 +2,6 @@ package com.alexilinskiy.currencyexchange.data.db.rates
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "ratesList")

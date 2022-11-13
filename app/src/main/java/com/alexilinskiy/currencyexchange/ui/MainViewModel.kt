@@ -2,9 +2,11 @@ package com.alexilinskiy.currencyexchange.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alexilinskiy.currencyexchange.data.Constants
+import com.alexilinskiy.currencyexchange.data.State
 import com.alexilinskiy.currencyexchange.data.db.currency.CurrencyModelDB
 import com.alexilinskiy.currencyexchange.data.db.rates.RatesModelDB
-import com.alexilinskiy.currencyexchange.domain.ICurrenciesUseCase
+import com.alexilinskiy.currencyexchange.domain.IDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -14,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val currenciesUseCase: ICurrenciesUseCase,
+    private val currenciesUseCase: IDataUseCase,
 ) : ViewModel() {
 
     private val _currenciesFlow = MutableStateFlow<State<List<CurrencyModelDB>>>(State.LoadingState)
@@ -81,7 +83,7 @@ class MainViewModel @Inject constructor(
 
                 currency?.let { currencyModelDB ->
                     currenciesList.addAll(currenciesList.sortedByDescending { it.name })
-                    currenciesUseCase.setCurrencyChanged(currency!!.copy(isSelected = !currencyModelDB.isSelected))
+                    currenciesUseCase.setCurrencyChanged(currencyModelDB.copy(isSelected = !currencyModelDB.isSelected))
                 }
             }
         }
@@ -94,11 +96,16 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             _ratesFlow.emit(State.LoadingState)
             try {
-                val data = currenciesUseCase.getRates(currency?.shortName.orEmpty(), currenciesList) as MutableList
+                val data = currenciesUseCase.getRates(
+                    currency?.shortName.orEmpty(),
+                    currenciesList
+                ) as MutableList
                 typeSort?.let { sort ->
                     when (sort) {
-                        "sort" -> data.sortBy { it.count }
-                        "sortByDesc" -> data.sortByDescending { it.count }
+                        Constants.SORT_VALUES_ASC_PARAM -> data.sortBy { it.count }
+                        Constants.SORT_VALUES_DESC_PARAM -> data.sortByDescending { it.count }
+                        Constants.SORT_ALPHABETICALLY_ASC_PARAM -> data.sortBy { it.name }
+                        Constants.SORT_ALPHABETICALLY_DESC_PARAM -> data.sortByDescending { it.name }
                         else -> Unit
                     }
                 }
@@ -107,6 +114,7 @@ class MainViewModel @Inject constructor(
                 _favoritesRatesFlow.emit(State.DataState(currenciesUseCase.getFavoritesRateList()))
             } catch (e: Exception) {
                 _ratesFlow.emit(State.ErrorState(e))
+                _favoritesRatesFlow.emit(State.ErrorState(e))
             }
         }
     }

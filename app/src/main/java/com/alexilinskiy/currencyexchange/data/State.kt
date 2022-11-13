@@ -1,4 +1,4 @@
-package com.alexilinskiy.currencyexchange.ui
+package com.alexilinskiy.currencyexchange.data
 
 sealed class State<out T> {
     object LoadingState : State<Nothing>()

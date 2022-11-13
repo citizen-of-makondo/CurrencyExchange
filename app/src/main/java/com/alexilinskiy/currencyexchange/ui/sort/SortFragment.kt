@@ -1,19 +1,13 @@
 package com.alexilinskiy.currencyexchange.ui.sort
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.OnBackPressedDispatcher
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import com.alexilinskiy.currencyexchange.R
-import com.alexilinskiy.currencyexchange.databinding.FragmentListBinding
+import com.alexilinskiy.currencyexchange.data.Constants
 import com.alexilinskiy.currencyexchange.databinding.FragmentSortBinding
-import com.alexilinskiy.currencyexchange.ui.list.ListFragmentDirections
 
 class SortFragment : Fragment() {
 
@@ -40,16 +34,27 @@ class SortFragment : Fragment() {
     }
 
     private fun observerView() = with(binding) {
-        sort.setOnClickListener {
-            val action =
-                SortFragmentDirections.actionSortFragmentToNavigationList(typeSort = "sort")
-            view?.findNavController()?.navigate(action)
+        sortValuesByAsc.setOnClickListener {
+            navigateWithParam(Constants.SORT_VALUES_ASC_PARAM)
         }
 
-        sortByDesc.setOnClickListener {
-            val action = SortFragmentDirections.actionSortFragmentToNavigationList(typeSort = "sortByDesc")
-            view?.findNavController()?.navigate(action)
+        sortValuesByDesc.setOnClickListener {
+            navigateWithParam(Constants.SORT_VALUES_DESC_PARAM)
         }
+
+        sortAlphabeticallyByAsc.setOnClickListener {
+            navigateWithParam(Constants.SORT_ALPHABETICALLY_ASC_PARAM)
+        }
+
+        sortAlphabeticallyByDesc.setOnClickListener {
+            navigateWithParam(Constants.SORT_ALPHABETICALLY_DESC_PARAM)
+        }
+    }
+
+    private fun navigateWithParam(param: String) {
+        val action =
+            SortFragmentDirections.actionSortFragmentToNavigationList(typeSort = param)
+        view?.findNavController()?.navigate(action)
     }
 
 }

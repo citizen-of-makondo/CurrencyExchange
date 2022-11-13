@@ -4,5 +4,5 @@ data class CurrenciesModel(
     val name: String,
     val shortName: String,
     val symbol: String,
-    var isSelected: Boolean
+    var isSelected: Boolean = false
 )

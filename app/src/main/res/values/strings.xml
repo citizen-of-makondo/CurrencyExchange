@@ -6,6 +6,12 @@
     <string name="error_message">Something was wrong</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="sort">Sort</string>
+    <string name="sort_by_asc">Sort by asc</string>
     <string name="sort_by_desc">Sort by desc</string>
+    <string name="sort_values">Sort values</string>
+    <string name="sort_alphabetically">Sort alphabetically</string>
+    <string name="sort_values_asc_param">Sort values asc param</string>
+    <string name="sort_values_desc_param">Sort values desc param</string>
+    <string name="sort_alphabetically_asc_param">Sort alphabetically asc param</string>
+    <string name="sort_alphabetically_desc_param">Sort alphabetically desc param</string>
 </resources>

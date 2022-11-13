@@ -4,9 +4,9 @@ import com.alexilinskiy.currencyexchange.data.db.currency.CurrencyModelDB
 import com.alexilinskiy.currencyexchange.data.db.rates.RatesModelDB
 import javax.inject.Inject
 
-class CurrenciesUseCaseImpl @Inject constructor(
-    private val currenciesRepository: ICurrenciesRepository
-) : ICurrenciesUseCase {
+class DataUseCaseImpl @Inject constructor(
+    private val currenciesRepository: IRepository
+) : IDataUseCase {
 
     override suspend fun getAllCurrenciesFromRemote() {
         currenciesRepository.getAllCurrenciesFromRemote()

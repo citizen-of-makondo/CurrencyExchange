@@ -18,5 +18,5 @@ data class CurrencyModelDB(
     @ColumnInfo(name = "symbol")
     val symbol: String,
     @ColumnInfo(name = "isSelected")
-    val isSelected: Boolean
+    val isSelected: Boolean = false
 )

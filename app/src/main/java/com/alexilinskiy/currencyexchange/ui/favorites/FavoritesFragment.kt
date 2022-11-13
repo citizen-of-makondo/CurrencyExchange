@@ -8,19 +8,19 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alexilinskiy.currencyexchange.R
-import com.alexilinskiy.currencyexchange.data.MapModel
+import com.alexilinskiy.currencyexchange.data.mapper.MapModel
 import com.alexilinskiy.currencyexchange.databinding.FragmentFavoritesBinding
 import com.alexilinskiy.currencyexchange.ui.RatesListAdapter
-import com.alexilinskiy.currencyexchange.ui.State
+import com.alexilinskiy.currencyexchange.data.State
 import com.alexilinskiy.currencyexchange.ui.MainViewModel
 import kotlinx.coroutines.launch
 
@@ -67,15 +67,13 @@ class FavoritesFragment : Fragment() {
 
             override fun onNothingSelected(p0: AdapterView<*>?) = Unit
         }
+        spinner
         adapter = RatesListAdapter { rate ->
             viewModel.onFavoriteIconClick(rate)
         }
         ratesList.layoutManager = LinearLayoutManager(requireContext())
         ratesList.adapter = adapter
-        binding.chooseCurrencyItem.filterButton.setOnClickListener {
-            val action = FavoritesFragmentDirections.actionNavigationFavoritesToSortFragment()
-            findNavController().navigate(action)
-        }
+        binding.chooseCurrencyItem.filterButton.isVisible = false
     }
 
     private fun observeViewModel() = with(binding) {
@@ -121,6 +119,7 @@ class FavoritesFragment : Fragment() {
             ) { _, _ ->
                 viewModel.getAllCurrencies()
             }
+            .setCancelable(false)
             .create()
             .show()
     }

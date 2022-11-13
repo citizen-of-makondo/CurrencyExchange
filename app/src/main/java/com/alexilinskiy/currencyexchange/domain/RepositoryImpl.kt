@@ -1,6 +1,6 @@
 package com.alexilinskiy.currencyexchange.domain
 
-import com.alexilinskiy.currencyexchange.data.MapModel
+import com.alexilinskiy.currencyexchange.data.mapper.MapModel
 import com.alexilinskiy.currencyexchange.data.db.currency.CurrencyDAO
 import com.alexilinskiy.currencyexchange.data.db.currency.CurrencyModelDB
 import com.alexilinskiy.currencyexchange.data.db.rates.RatesDAO
@@ -8,27 +8,26 @@ import com.alexilinskiy.currencyexchange.data.db.rates.RatesModelDB
 import com.alexilinskiy.currencyexchange.domain.remote.CurrencyExchangeApi
 import javax.inject.Inject
 
-class CurrenciesRepositoryImpl @Inject constructor(
+class RepositoryImpl @Inject constructor(
     private val currencyExchangeApi: CurrencyExchangeApi,
     private val currencyDAO: CurrencyDAO,
     private val ratesDAO: RatesDAO
-) : ICurrenciesRepository {
+) : IRepository {
 
     override suspend fun getAllCurrenciesFromRemote() {
-
         val data = currencyExchangeApi.getAllCurrencies()
         val list = MapModel.mapCurrenciesToModel(data)
 
         list.forEach {
             currencyDAO.addCurrency(
-                CurrencyModelDB(name = it.name, shortName = it.shortName, symbol = it.symbol, isSelected = false)
+                CurrencyModelDB(name = it.name, shortName = it.shortName, symbol = it.symbol)
             )
         }
     }
 
-    override suspend fun getAllCurrenciesFromLocal(): List<CurrencyModelDB> {
-        return currencyDAO.getCurrency()
-    }
+    override suspend fun getAllCurrenciesFromLocal(): List<CurrencyModelDB> =
+        currencyDAO.getCurrency()
+
 
     override suspend fun getRates(
         base: String,
@@ -70,9 +69,9 @@ class CurrenciesRepositoryImpl @Inject constructor(
         return ratesDAO.getRates()
     }
 
-    override suspend fun getFavoritesRateList(): List<RatesModelDB> {
-        return ratesDAO.getFavoritesRatesList()
-    }
+    override suspend fun getFavoritesRateList(): List<RatesModelDB> =
+        ratesDAO.getFavoritesRatesList()
+
 
     override suspend fun setCurrencyChanged(changedCurrency: CurrencyModelDB) {
         val data = currencyDAO.getCurrency()
@@ -91,8 +90,6 @@ class CurrenciesRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getFilteredList(): List<CurrencyModelDB> {
-        return currencyDAO.getCurrency()
-    }
+    override suspend fun getFilteredList(): List<CurrencyModelDB> = currencyDAO.getCurrency()
 
 }

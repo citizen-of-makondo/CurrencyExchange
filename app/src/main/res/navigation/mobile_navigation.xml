@@ -27,9 +27,6 @@
         android:name="com.alexilinskiy.currencyexchange.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites">
-        <action
-            android:id="@+id/action_navigation_favorites_to_sortFragment"
-            app:destination="@id/sortFragment" />
     </fragment>
     <fragment
         android:id="@+id/sortFragment"

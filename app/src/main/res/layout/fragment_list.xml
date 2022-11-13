@@ -13,7 +13,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ratesList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/margin_zero"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

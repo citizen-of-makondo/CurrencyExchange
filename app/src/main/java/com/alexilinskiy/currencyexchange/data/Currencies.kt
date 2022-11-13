@@ -1,6 +1,5 @@
 package com.alexilinskiy.currencyexchange.data
 
-@kotlinx.serialization.Serializable
 data class Currencies(
     val AUD: AUD, val BGN: BGN, val BRL: BRL, val CAD: CAD,
     val CHF: CHF, val CNY: CNY, val CZK: CZK, val DKK: DKK,
@@ -12,7 +11,6 @@ data class Currencies(
     val SGD: SGD, val THB: THB, val TRY: TRY, val USD: USD,
     val ZAR: ZAR
 )
-
 data class AUD(val name: String, val symbol: String)
 
 data class BGN(val name: String, val symbol: String)

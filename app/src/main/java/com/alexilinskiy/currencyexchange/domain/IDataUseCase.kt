@@ -3,7 +3,7 @@ package com.alexilinskiy.currencyexchange.domain
 import com.alexilinskiy.currencyexchange.data.db.currency.CurrencyModelDB
 import com.alexilinskiy.currencyexchange.data.db.rates.RatesModelDB
 
-interface ICurrenciesUseCase {
+interface IDataUseCase {
 
     suspend fun getAllCurrenciesFromRemote()
 

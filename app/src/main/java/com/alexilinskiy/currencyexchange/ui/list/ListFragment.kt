@@ -19,11 +19,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alexilinskiy.currencyexchange.R
-import com.alexilinskiy.currencyexchange.data.MapModel
+import com.alexilinskiy.currencyexchange.data.mapper.MapModel
 import com.alexilinskiy.currencyexchange.databinding.FragmentListBinding
 import com.alexilinskiy.currencyexchange.ui.MainViewModel
 import com.alexilinskiy.currencyexchange.ui.RatesListAdapter
-import com.alexilinskiy.currencyexchange.ui.State
+import com.alexilinskiy.currencyexchange.data.State
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -78,9 +78,9 @@ class ListFragment : Fragment() {
         ratesList.layoutManager = LinearLayoutManager(requireContext())
         ratesList.adapter = adapter
 
-        binding.chooseCurrencyItem.filterButton.setOnClickListener {
+        binding.chooseCurrencyItem.filterButton.setOnClickListener {view ->
             val action = ListFragmentDirections.actionNavigationListToSortFragment()
-            it.findNavController().navigate(action)
+            view.findNavController().navigate(action)
         }
     }
 
@@ -128,6 +128,7 @@ class ListFragment : Fragment() {
             ) { _, _ ->
                 viewModel.getAllCurrencies()
             }
+            .setCancelable(false)
             .create()
             .show()
     }
